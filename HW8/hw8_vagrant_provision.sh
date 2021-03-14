@@ -19,3 +19,14 @@ CHECK=$(sudo grep "^\s*$LOGIN\s*no" "$CONF")
 if [ -z "$CHECK" ]; then sudo sh -c "echo '$LOGIN no' >> $CONF" ; fi ; fi
 
 sudo yum install -y mc vim git
+sudo sh -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"
+sudo sh -c "echo 'nameserver 1.1.1.1' >> /etc/resolv.conf"
+
+if ! ping -c1 myownapp.com > /dev/null 2>&1; then
+sudo sh -c "echo '127.0.0.1 myownapp.com' >> /etc/hosts"; fi 
+
+DEF=$(ip route | grep default | awk '{print $3}' | cut -f1-3 -d'.')
+echo $(ip a | grep "$DEF" | awk '{print $2}')
+
+sudo mkdir /var/log/myownapp
+sudo chown hw8 /var/log/myownapp
