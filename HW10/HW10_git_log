@@ -1,0 +1,73 @@
+commit 804e372c9868afe13d78f92d45969d7e70104dbd
+Author: Yauhen Ashkinadze <r0var@outlook.com>
+Date:   Sat Mar 20 15:30:21 2021 +0300
+
+    test ac alias
+
+commit b7e59d6c1fd5357034f0e34e77fccb3c702f3a0c
+Author: Yauhen Ashkinadze <r0var@outlook.com>
+Date:   Sat Mar 20 14:26:45 2021 +0300
+
+    test2 added amend
+
+commit 575e31f0a1964d1ce7900e43d884cfc1711a1b66
+Author: Yauhen Ashkinadze <r0var@outlook.com>
+Date:   Sat Mar 20 12:48:21 2021 +0300
+
+    test1 update
+
+commit b74f5b62ef4c8f39814002f806d82f81871ce33c
+Merge: 9de890f d284317
+Author: Yauhen Ashkinadze <r0var@outlook.com>
+Date:   Sat Mar 20 12:45:31 2021 +0300
+
+    git gui conflcit resolved with meld
+
+commit 9de890febf039d1da09457c76dca1c9a0d4f529e
+Author: Yauhen Ashkinadze <r0var@outlook.com>
+Date:   Sat Mar 20 11:40:59 2021 +0300
+
+    test1 changed localy again
+
+commit d2843173e48daf2bf59136bc3bae29bb8794301e
+Author: r0var <78319390+r0var@users.noreply.github.com>
+Date:   Sat Mar 20 11:40:05 2021 +0300
+
+    Update test1
+
+commit 2b97c3dc8e803b23872d54598cbb326746417dfb
+Merge: a410ad6 dea72c1
+Author: Yauhen Ashkinadze <r0var@outlook.com>
+Date:   Sat Mar 20 11:38:52 2021 +0300
+
+    conflict resolved
+
+commit a410ad63a5711ebdfccc4d5402f04c1b98805c12
+Author: Yauhen Ashkinadze <r0var@outlook.com>
+Date:   Sat Mar 20 11:37:32 2021 +0300
+
+    test1 changed lolcaly
+
+commit dea72c1c7ceead146bd3f67ef70e19341b030542
+Author: r0var <78319390+r0var@users.noreply.github.com>
+Date:   Sat Mar 20 11:35:29 2021 +0300
+
+    Update test1
+
+commit a145cab208c8973754a9a300c795be066b9c527a
+Author: Yauhen Ashkinadze <r0var@outlook.com>
+Date:   Sat Mar 20 11:34:37 2021 +0300
+
+    test1 added
+
+commit b093c0252687f3b8db70ebc20af0160f0f278b12
+Author: Yauhen Ashkinadze <r0var@outlook.com>
+Date:   Sat Mar 20 11:32:38 2021 +0300
+
+    test1 added
+
+commit 40849bddeec776a8d4a3440f387b09401bf70eda
+Author: r0var <78319390+r0var@users.noreply.github.com>
+Date:   Sat Mar 20 11:15:26 2021 +0300
+
+    Initial commit
