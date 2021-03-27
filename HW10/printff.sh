@@ -20,5 +20,4 @@ function findFiles {
 case $CASE in
     --findf) findFiles $FTYPE;;
     --find) find $FOLD;;
-    --help) printHelp;;
 esac
