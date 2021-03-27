@@ -1,22 +1,24 @@
 #!/bin/bash
 
-FOLD=$2
-FTYPE1="*.png"
-FTYPE2="*.sh"
+CASE=$1
+DIR=$2
+FTYPE="*.png *.sh"
 
 function findFiles {
-  find $FOLD -type f \( -name "$FTYPE1" -o -name "$FTYPE2" \)
+  if [ ! -z "$1" ]; then
+    COMMAND="find $DIR -type f \("  
+    args=("$@")
+    ELEMENTS=${#args[@]}
+    for (( i=0;i<$ELEMENTS-1;i++ )); do
+      COMMAND+=" -name \"${args[${i}]}\" -o"
+    done
+    COMMAND+=" -name \"${args[$ELEMENTS-1]}\" \)"
+    eval "$COMMAND"
+  fi
 }
 
-function printHelp {
-  echo -e "   --help                  Shows help \n \
-  --findf [PATH]          Find .sh and .png files in subdirectories \n \
-  --find [PATH]           Find all files and folders in subdiectories"
-}
-
-case $1 in
-    --findf) findFiles;;
+case $CASE in
+    --findf) findFiles $FTYPE;;
     --find) find $FOLD;;
     --help) printHelp;;
-    *) echo "Try './printff.sh --help' for more information.";;
 esac
