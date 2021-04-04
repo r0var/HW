@@ -29,5 +29,5 @@ function compareNumbers {
 }
 
 compareNumbers $FIRST $SECOND
+compareNumbers $FIRST $THIRD
 compareNumbers $SECOND $THIRD
-compareNumbers $THIRD $FIRST
