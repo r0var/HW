@@ -1,0 +1,3 @@
+FROM alpine
+RUN apk add --no-cache curl tcpdump vim mysql-client python3 go
+CMD go version && python3 --version
