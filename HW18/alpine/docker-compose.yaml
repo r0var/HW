@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile_alpine
+    image: alpine:custom
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 100M
+  app2:
+    image: alpine:custom
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 100M
+  

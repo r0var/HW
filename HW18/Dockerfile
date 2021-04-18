@@ -1,6 +1,6 @@
-FROM ubuntu
+FROM ubuntu AS one
 RUN cat /etc/os-release > ubuntuone
 
 FROM alpine
-COPY --from=0 /ubuntuone /
+COPY --from=one /ubuntuone /
 CMD cat ubuntuone && echo "" && cat /etc/os-release
