@@ -1,0 +1,7 @@
+---
+- name: add to sudo group
+  user:
+    name: hw20
+    append: yes
+    groups:
+      - sudo

@@ -1,0 +1,11 @@
+all:
+  children:
+    linux:
+      children:
+        ubuntu:
+          hosts:
+            192.168.10.101
+        centos:
+          hosts:
+            192.168.10.102
+        
