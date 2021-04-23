@@ -1,17 +1,44 @@
 ---
-- name: Update apt-get repo and cache
-  apt: update_cache=yes
+- name: Add Docker CE repo ubuntu
+  become: true
+  block:
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: Add docker repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+    - name: update apt cache
+      apt: update_cache=yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Add Docker CE repo centos
+  become: true
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+  when: ansible_distribution == 'CentOS'
 
 - name: Install packages
+  become: true
   package:
     name: "{{item}}"
     state: present
   loop:
     - git
-    - docker.io
     - python3
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+
+- name: Start and enable the Docker daemon
+  become: true
+  service: name=docker state=started enabled=yes
 
 - name: add user hw20
+  become: true
   user:
     name: hw20
     create_home: yes
@@ -23,4 +50,15 @@
   when: ifsudo
 
 - name: git clone
-  shell: sudo -u hw20 git clone https://github.com/Swordfish90/cool-retro-term.git /opt/hw20/git
+  become: true
+  git:
+    clone: yes
+    dest: /opt/hw20/git
+    repo: https://github.com/Swordfish90/cool-retro-term.git
+
+- name: folder permissions
+  become: true
+  file:
+    path: /opt/hw20/git
+    owner: hw20
+    group: hw20
