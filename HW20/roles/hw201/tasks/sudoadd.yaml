@@ -5,14 +5,4 @@
     name: hw20
     append: yes
     groups:
-      - sudo
-  when: ansible_distribution == 'Ubuntu'
-
-- name: add to sudoers centos
-  become: true
-  user:
-    name: hw20
-    append: yes
-    groups:
-      - wheel
-  when: ansible_distribution == 'CentOS'
+      - "{{sudogroup}}"

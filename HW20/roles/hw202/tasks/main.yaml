@@ -3,20 +3,20 @@
   copy:
     src: "{{copysource}}"
     dest: "{{copypath}}"
-    owner: vagrant
-    group: vagrant
-    mode: '0644'
+    owner: "{{user_group}}"
+    group: "{{user_group}}"
+    mode: "{{priviledges}}"
 
 - name: Install curl from deb
   block:
     - name: copy deb package
       copy:
-        src: files/curl_7.68.0-1ubuntu2.5_amd64.deb
-        dest: /home/vagrant
+        src: "files/{{deb_packages}}"
+        dest: "{{packages_dest}}"
     - name: install deb package
       become: true
       apt:
-        deb: /home/vagrant/curl_7.68.0-1ubuntu2.5_amd64.deb
+        deb: "{{packages_dest}}/{{deb_packages}}"
         state: present
   when: ansible_distribution == 'Ubuntu'
 
@@ -24,12 +24,12 @@
   block:
     - name: copy rpm package
       copy:
-        src: files/curl-7.61.1-14.el8_3.1.x86_64.rpm
-        dest: /home/vagrant
+        src: "files/{{rpm_packages}}"
+        dest: "{{packages_dest}}"
     - name: install rpm package
       become: true
       yum:
-        name: /home/vagrant/curl-7.61.1-14.el8_3.1.x86_64.rpm
+        name: "{{packages_dest}}/{{rpm_packages}}"
         state: present
         disable_gpg_check: yes
   when: ansible_distribution == 'CentOS'
@@ -37,5 +37,7 @@
 - name: create hw20 file info
   become: true
   template:
-    src: templates/hw20.j2
+    src: "{{item}}"
     dest: /HW20_FILE_INFO
+  loop:
+    - templates/hw20.j2

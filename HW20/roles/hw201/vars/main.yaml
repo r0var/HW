@@ -1,1 +1,7 @@
 ifsudo: true
+list_of_packages:
+  - git
+  - python3
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io

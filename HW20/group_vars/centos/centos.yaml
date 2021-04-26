@@ -1,3 +1,3 @@
-ansible_user: vagrant
 ansible_ssh_private_key_file: .vagrant/machines/s2/virtualbox/private_key
 group_hw20: ZONE_2
+sudogroup: wheel
