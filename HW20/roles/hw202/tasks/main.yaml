@@ -11,27 +11,31 @@
   block:
     - name: copy deb package
       copy:
-        src: "files/{{deb_packages}}"
+        src: "files/{{item.name}}"
         dest: "{{packages_dest}}"
+      loop: "{{deb_packages}}"
     - name: install deb package
       become: true
       apt:
-        deb: "{{packages_dest}}/{{deb_packages}}"
+        deb: "{{item.suffix}}/{{item.name}}"
         state: present
+      loop: "{{deb_packages}}"
   when: ansible_distribution == 'Ubuntu'
 
 - name: Install curl from rpm
   block:
     - name: copy rpm package
       copy:
-        src: "files/{{rpm_packages}}"
+        src: "files/{{item.name}}"
         dest: "{{packages_dest}}"
+      loop: "{{rpm_packages}}"
     - name: install rpm package
       become: true
       yum:
-        name: "{{packages_dest}}/{{rpm_packages}}"
+        name: "{{item.suffix}}/{{item.name}}"
         state: present
         disable_gpg_check: yes
+      loop: "{{rpm_packages}}"
   when: ansible_distribution == 'CentOS'
 
 - name: create hw20 file info

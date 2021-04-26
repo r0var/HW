@@ -3,5 +3,7 @@ copypath: /home/vagrant
 user_group: vagrant
 priviledges: '0644'
 packages_dest: /home/vagrant/
-deb_packages: curl_7.68.0-1ubuntu2.5_amd64.deb
-rpm_packages: curl-7.61.1-14.el8_3.1.x86_64.rpm
+deb_packages:
+  - { name: "curl_7.68.0-1ubuntu2.5_amd64.deb", suffix: "{{packages_dest}}" }
+rpm_packages:
+  - { name: "curl-7.61.1-14.el8_3.1.x86_64.rpm", suffix: "{{packages_dest}}" }
