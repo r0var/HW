@@ -1,0 +1,47 @@
+---
+- name: copy local files to remote
+  copy:
+    src: "{{copysource}}"
+    dest: "{{copypath}}"
+    owner: "{{user_group}}"
+    group: "{{user_group}}"
+    mode: "{{priviledges}}"
+
+- name: Install curl from deb
+  block:
+    - name: copy deb package
+      copy:
+        src: "files/{{item.name}}"
+        dest: "{{packages_dest}}"
+      loop: "{{deb_packages}}"
+    - name: install deb package
+      become: true
+      apt:
+        deb: "{{item.suffix}}/{{item.name}}"
+        state: present
+      loop: "{{deb_packages}}"
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install curl from rpm
+  block:
+    - name: copy rpm package
+      copy:
+        src: "files/{{item.name}}"
+        dest: "{{packages_dest}}"
+      loop: "{{rpm_packages}}"
+    - name: install rpm package
+      become: true
+      yum:
+        name: "{{item.suffix}}/{{item.name}}"
+        state: present
+        disable_gpg_check: yes
+      loop: "{{rpm_packages}}"
+  when: ansible_distribution == 'CentOS'
+
+- name: create hw20 file info
+  become: true
+  template:
+    src: "{{item}}"
+    dest: /HW20_FILE_INFO
+  loop:
+    - templates/hw20.j2
