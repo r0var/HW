@@ -1,0 +1,35 @@
+---
+- name: Add Docker CE repo ubuntu
+  become: true
+  block:
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: Add docker repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+    - name: update apt cache
+      apt: update_cache=yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Add Docker CE repo centos
+  become: true
+  get_url:
+    url: "{{item}}"
+    dest: /etc/yum.repos.d/
+  loop: 
+    - https://download.docker.com/linux/centos/docker-ce.repo
+  when: ansible_distribution == 'CentOS'
+
+- name: Install packages
+  become: true
+  package:
+    name: "{{item}}"
+    state: present
+  loop: "{{list_of_packages}}"
+
+- name: Start and enable the Docker daemon
+  become: true
+  service: name=docker state=started enabled=yes
