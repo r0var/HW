@@ -1,4 +1,8 @@
 ---
-- hosts: all
+- hosts: list
   roles:
     - hw211
+
+- hosts: with
+  roles:
+    - hw212
