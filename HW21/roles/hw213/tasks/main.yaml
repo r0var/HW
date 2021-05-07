@@ -4,16 +4,9 @@
   template:
     src: "{{item.src}}"
     dest: "{{item.dst}}"
+    owner: "{{user}}"
+    group: "{{group}}"
+    mode: "{{mode}}"
   loop: "{{templatelist}}"
-
-- name: script +x
-  become: true
-  file:
-    path: /home/vagrant/logger.sh
-    owner: root
-    group: root
-    mode: 0744
-
-- name: start and enable service
-  become: true
-  service: name={{servicename}} state=started enabled=yes
+  notify:
+    - start and enable service

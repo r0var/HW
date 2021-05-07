@@ -2,9 +2,9 @@ all:
   children:
     linux:
       children:
-        list:
+        ubuntu1:
           hosts:
             192.168.10.10
-        with:
+        ubuntu2:
           hosts:
             192.168.10.11

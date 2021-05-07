@@ -6,6 +6,6 @@
 - name: Install packages
   become: true
   package:
-    name: "{{item}}"
+    name: "{{item.name}}={{item.ver}}"
     state: present
   with_items: "{{list_of_packages}}"

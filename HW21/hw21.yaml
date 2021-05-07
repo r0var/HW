@@ -1,9 +1,9 @@
 ---
-- hosts: list
+- hosts: ubuntu1
   roles:
     - hw211
 
-- hosts: with
+- hosts: ubuntu2
   roles:
     - hw212
 

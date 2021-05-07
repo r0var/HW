@@ -3,3 +3,6 @@ servicename: logger
 templatelist:
   - { src: "templates/logger.j2", dst: "/home/vagrant/logger.sh" }
   - { src: "templates/service.j2", dst: "/etc/systemd/system/{{servicename}}.service" }
+user: root
+group: root
+mode: 0744
