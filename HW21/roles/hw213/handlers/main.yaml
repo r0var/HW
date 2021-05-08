@@ -1,0 +1,4 @@
+---
+- name: start and enable service
+  become: true
+  service: name={{servicename}} state=started enabled=yes

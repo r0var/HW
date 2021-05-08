@@ -1,0 +1,11 @@
+---
+- name: Update apt cache
+  become: true
+  apt: update_cache=yes
+
+- name: Install packages
+  become: true
+  package:
+    name: "{{item.name}}={{item.ver}}"
+    state: present
+  with_items: "{{list_of_packages}}"

@@ -1,0 +1,5 @@
+list_of_packages:
+  - { name: "apache2-bin", ver: "2.4.41-4ubuntu3" }
+  - { name: "apache2-data", ver: "2.4.41-4ubuntu3" }
+  - { name: "apache2-utils", ver: "2.4.41-4ubuntu3" }
+  - { name: "apache2", ver: "2.4.41-4ubuntu3" }

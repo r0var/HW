@@ -1,0 +1,12 @@
+---
+- hosts: ubuntu1
+  roles:
+    - hw211
+
+- hosts: ubuntu2
+  roles:
+    - hw212
+
+- hosts: all
+  roles:
+    - hw213
