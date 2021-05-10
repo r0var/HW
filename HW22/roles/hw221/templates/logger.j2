@@ -1,0 +1,14 @@
+#!/bin/bash
+
+function writeLog {
+  STR=$(date +"%d %b %G %H:%M %Z " -u)
+  DEF=$(ip route | grep default | awk '{print $3}' | awk -F"." '{print $1"."$2"."$3"."}')
+  STR+=$(ip a | grep "$DEF" | awk '{print $2}')
+  echo $STR >> {{log_path}}
+}
+
+while [ true ]
+do
+  writeLog
+  sleep 30
+done
