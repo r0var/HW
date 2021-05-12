@@ -1,0 +1,7 @@
+{{log_path}} {
+  {{log_period}}
+  rotate {{log_rotate}}
+{% if log_compress == 'compress' %}
+  {{log_compress}}
+{% endif %}
+}

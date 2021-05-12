@@ -6,3 +6,8 @@ templatelist:
 user: root
 group: root
 mode: 0744
+log_period: daily
+log_rotate: 3
+log_compress: compress
+logrotatelist:
+  - { src: "templates/logrotate.j2", dst: "/etc/logrotate.d/{{servicename}}"}

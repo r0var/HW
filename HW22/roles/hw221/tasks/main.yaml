@@ -10,3 +10,4 @@
   loop: "{{templatelist}}"
   notify:
     - start and enable service
+    - logrotate task
