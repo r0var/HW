@@ -11,3 +11,13 @@
   notify:
     - start and enable service
     - logrotate task
+
+- name: add users loop
+  no_log: true
+  import_tasks: adduserloop.yaml
+  when: useraddmethod == "loop"
+
+- name: add users with
+  no_log: true
+  import_tasks: adduserwith.yaml
+  when: useraddmethod == "with"

@@ -11,3 +11,8 @@ log_rotate: 3
 log_compress: compress
 logrotatelist:
   - { src: "templates/logrotate.j2", dst: "/etc/logrotate.d/{{servicename}}"}
+user_home: /tmp/hw22
+user_groups:
+  - hw22
+user_shell: /bin/bash
+useraddmethod: loop

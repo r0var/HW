@@ -1,0 +1,19 @@
+---
+- name: add groups
+  become: true
+  group:
+    name: "{{item}}"
+    state: present
+  with_items: "{{user_groups}}"
+
+- name: add users using with
+  become: true
+  user:
+    name: "{{item}}"
+    home: "{{user_home}}/{{item}}"
+    groups: "{{user_groups}}"
+    shell: "{{user_shell}}"
+    state: present
+  with_items:
+    - hw22_1
+    - hw22_2
