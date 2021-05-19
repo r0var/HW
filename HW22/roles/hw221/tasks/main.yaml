@@ -21,3 +21,21 @@
   no_log: true
   import_tasks: adduserwith.yaml
   when: useraddmethod == "with"
+
+- name: print password
+  debug:
+    msg: "{{password}}"
+
+- name: save data locally
+  lineinfile:
+    path: "{{local_log_path}}"
+    line: "{{ ansible_date_time.date }}"
+    create: yes
+  delegate_to: localhost
+
+- name: save hostnames locally
+  lineinfile:
+    path: "{{local_log_path}}"
+    line: "{{ inventory_hostname }}"
+    create: yes
+  delegate_to: localhost

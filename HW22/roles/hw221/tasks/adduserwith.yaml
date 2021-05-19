@@ -14,6 +14,7 @@
     groups: "{{user_groups}}"
     shell: "{{user_shell}}"
     state: present
+    password: "{{password | password_hash('sha512')}}"
   with_items:
     - hw22_1
     - hw22_2

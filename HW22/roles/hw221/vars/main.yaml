@@ -16,3 +16,5 @@ user_groups:
   - hw22
 user_shell: /bin/bash
 useraddmethod: loop
+password: 8+TtqQcGawucsipWdF6tWKnZQPNfAVOLe7YL+MNxRs0=
+local_log_path: hosts_list.txt
