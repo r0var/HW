@@ -39,3 +39,8 @@
     line: "{{ inventory_hostname }}"
     create: yes
   delegate_to: localhost
+
+- name: copy files
+  copy:
+    src: "{{inventory_hostname}}.txt"
+    dest: "{{copypath}}"
