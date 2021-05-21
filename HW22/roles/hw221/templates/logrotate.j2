@@ -1,7 +1,7 @@
 {{log_path}} {
-  {{log_period}}
-  rotate {{log_rotate}}
-{% if log_compress == 'compress' %}
-  {{log_compress}}
+  {{log.period}}
+  rotate {{log.rotate}}
+{% if log.compress == 'compress' %}
+  {{log.compress}}
 {% endif %}
 }

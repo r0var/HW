@@ -4,9 +4,9 @@
   template:
     src: "{{item.src}}"
     dest: "{{item.dst}}"
-    owner: "{{user}}"
-    group: "{{group}}"
-    mode: "{{mode}}"
+    owner: "{{user.name}}"
+    group: "{{user.group}}"
+    mode: "{{user.mode}}"
   loop: "{{templatelist}}"
   notify:
     - start and enable service

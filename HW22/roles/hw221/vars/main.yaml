@@ -3,14 +3,19 @@ servicename: logger
 templatelist:
   - { src: "templates/logger.j2", dst: "/home/vagrant/logger.sh" }
   - { src: "templates/service.j2", dst: "/etc/systemd/system/{{servicename}}.service" }
-user: root
-group: root
-mode: 0744
-log_period: daily
-log_rotate: 3
-log_compress: compress
-logrotatelist:
-  - { src: "templates/logrotate.j2", dst: "/etc/logrotate.d/{{servicename}}"}
+
+user:
+  name: root
+  group: root
+  mode: '744'
+
+log:
+  period: daily
+  rotate: 3
+  compress: compress
+  rotatelist:
+    - { src: "templates/logrotate.j2", dst: "/etc/logrotate.d/{{servicename}}"}
+
 user_home: /tmp/hw22
 user_groups:
   - hw22
