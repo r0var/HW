@@ -1,4 +1,6 @@
 ---
 - hosts: ubuntu
+  vars_files:
+    - vars.yaml
   roles:
     - hw221

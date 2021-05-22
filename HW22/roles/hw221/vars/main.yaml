@@ -16,11 +16,15 @@ log:
   rotatelist:
     - { src: "templates/logrotate.j2", dst: "/etc/logrotate.d/{{servicename}}"}
 
-user_home: /tmp/hw22
 user_groups:
   - hw22
-user_shell: /bin/bash
+  - testgroup
+
+userlist:
+  - {name: "hw22_1", home: "/tmp/hw22_1", shell: "/bin/bash"}
+  - {name: "hw22_2", home: "/tmp/hw22_2", shell: "/bin/bash"}
+
 useraddmethod: loop
-password: 8+TtqQcGawucsipWdF6tWKnZQPNfAVOLe7YL+MNxRs0=
+
 local_log_path: hosts_list.txt
 copypath: /home/vagrant

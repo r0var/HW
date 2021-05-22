@@ -1,2 +1,3 @@
 .vagrant/
 hosts_list.txt
+.ansible_vault_pass

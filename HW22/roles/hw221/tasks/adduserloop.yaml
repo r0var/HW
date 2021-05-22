@@ -9,12 +9,10 @@
 - name: add users using loop
   become: true
   user:
-    name: "{{item}}"
-    home: "{{user_home}}/{{item}}"
+    name: "{{item.name}}"
+    home: "{{item.home}}/{{item.name}}"
     groups: "{{user_groups}}"
-    shell: "{{user_shell}}"
+    shell: "{{item.shell}}"
     state: present
     password: "{{password | password_hash('sha512')}}"
-  loop:
-    - hw22_1
-    - hw22_2
+  loop: "{{userlist}}"
