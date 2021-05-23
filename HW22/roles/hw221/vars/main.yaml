@@ -1,0 +1,30 @@
+log_path: /home/vagrant/log
+servicename: logger
+templatelist:
+  - { src: "templates/logger.j2", dst: "/home/vagrant/logger.sh" }
+  - { src: "templates/service.j2", dst: "/etc/systemd/system/{{servicename}}.service" }
+
+user:
+  name: root
+  group: root
+  mode: '744'
+
+log:
+  period: daily
+  rotate: 3
+  compress: compress
+  rotatelist:
+    - { src: "templates/logrotate.j2", dst: "/etc/logrotate.d/{{servicename}}"}
+
+user_groups:
+  - hw22
+  - testgroup
+
+userlist:
+  - {name: "hw22_1", home: "/tmp/hw22_1", shell: "/bin/bash"}
+  - {name: "hw22_2", home: "/tmp/hw22_2", shell: "/bin/bash"}
+
+useraddmethod: loop
+
+local_log_path: hosts_list.txt
+copypath: /home/vagrant

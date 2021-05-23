@@ -1,0 +1,14 @@
+---
+- name: start and enable service
+  become: true
+  service:
+    name: "{{servicename}}"
+    state: started
+    enabled: yes
+
+- name: logrotate task
+  become: true
+  template:
+    src: "{{item.src}}"
+    dest: "{{item.dst}}"
+  loop: "{{log.rotatelist}}"

@@ -1,0 +1,14 @@
+all:
+  children:
+    linux:
+      children:
+        testhost1:
+          hosts:
+            192.168.10.10
+        testhost2:
+          hosts:
+            192.168.10.11
+        ubuntu:
+          children:
+            testhost1:
+            testhost2:

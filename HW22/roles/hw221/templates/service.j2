@@ -1,0 +1,11 @@
+[Unit]
+Description={{servicename}}
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/home/vagrant/logger.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,18 @@
+---
+- name: add groups
+  become: true
+  group:
+    name: "{{item}}"
+    state: present
+  with_items: "{{user_groups}}"
+
+- name: add users using with
+  become: true
+  user:
+    name: "{{item.name}}"
+    home: "{{item.home}}/{{item.name}}"
+    groups: "{{user_groups}}"
+    shell: "{{item.shell}}"
+    state: present
+    password: "{{password | password_hash('sha512')}}"
+  with_items: "{{userlist}}"
