@@ -1,0 +1,13 @@
+testfile:
+  name: hw23_test_file
+  path: /opt/
+  mode: '644'
+  state: touch
+  newname: hw23_test_file_exists
+
+testlink:
+  src: /etc/hosts
+  path: /opt/
+  name: hw23_link
+  newname: hw23_test_file_link
+  state: link
