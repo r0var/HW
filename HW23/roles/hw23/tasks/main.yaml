@@ -2,23 +2,23 @@
 - name: create file
   become: true
   file:
-    path: "{{testfile.path}}{{testfile.name}}"
+    path: "{{testfile.name}}"
     mode: "{{testfile.mode}}"
     state: "{{testfile.state}}"
 
 - name: check file stat
   stat:
-    path: "{{testfile.path}}{{testfile.name}}"
+    path: "{{testfile.name}}"
   register: stat_result
 
 - name: rename file
   become: true
-  command: "mv {{testfile.path}}{{testfile.name}} {{testfile.path}}{{testfile.newname}}"
+  command: "mv {{testfile.name}} {{testfile.newname}}"
   when: stat_result.stat.exists
 
 - name: check file stat
   stat:
-    path: "{{testfile.path}}{{testfile.name}}"
+    path: "{{testfile.name}}"
   register: stat_result
 
 - name: if file not exists
@@ -30,22 +30,22 @@
   become: true
   file:
     src: "{{testlink.src}}"
-    dest: "{{testlink.path}}{{testlink.name}}"
+    dest: "{{testlink.name}}"
     state: "{{testlink.state}}"
 
 - name: check link stat
   stat:
-    path: "{{testlink.path}}{{testlink.name}}"
+    path: "{{testlink.name}}"
   register: islink
 
 - name: rename link
   become: true
-  command: "mv {{testlink.path}}{{testlink.name}} {{testlink.path}}{{testlink.newname}}"
+  command: "mv {{testlink.name}} {{testlink.newname}}"
   when: islink.stat.exists and islink.stat.islnk 
 
 - name: check link stat
   stat:
-    path: "{{testlink.path}}{{testlink.name}}"
+    path: "{{testlink.name}}"
   register: islink
 
 - name: if file is not link

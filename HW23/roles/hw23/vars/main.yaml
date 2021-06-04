@@ -1,13 +1,25 @@
 testfile:
-  name: hw23_test_file
-  path: /opt/
+  name: /opt/hw23_test_file
   mode: '644'
   state: touch
-  newname: hw23_test_file_exists
+  newname: /opt/hw23_test_file_exists
 
 testlink:
   src: /etc/hosts
-  path: /opt/
-  name: hw23_link
-  newname: hw23_test_file_link
+  name: /opt/hw23_link
+  newname: /opt/hw23_test_file_link
   state: link
+
+packages_list:
+  - nginx
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+
+services_list:
+  - nginx
+  - docker
+
+failtask:
+  name1: "generate exit code 0"
+  name2: "generate exit code 2"

@@ -1,0 +1,66 @@
+---
+- name: install services
+  become: true
+  block:
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: Add docker repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present  
+    - name: update apt cache
+      apt:
+        update_cache: yes
+    - name: install packages
+      package:
+        name: "{{item}}"
+        state: present
+      loop: "{{packages_list}}"
+      notify:
+        - restart services
+
+- name: get service facts
+  service_facts:
+
+- name: restart nginx if failed
+  block:
+  - name: restart nginx
+    become: true
+    service:
+      name: nginx
+      state: restarted
+      enabled: yes
+  - name: read log
+    become: true
+    command: tail -20 /var/log/nginx/access.log
+    register: log_reader
+  - name: message
+    debug:
+      msg: "{{log_reader.stdout}}"
+  when: ansible_facts.services["nginx.service"].state == "stopped"
+
+- name: copy script
+  copy:
+    src: files/test.sh
+    dest: /home/vagrant
+    mode: '777'
+
+- name: "{{failtask.name1}}"
+  command: /home/vagrant/test.sh
+  register: failtask1
+  ignore_errors: yes
+
+- name: print failtask1
+  debug:
+    msg: "{{failtask.name1}} rc={{failtask1.rc}}"
+
+- name: "{{failtask.name2}}"
+  command: /home/vagrant/test.sh 2
+  register: failtask2
+  ignore_errors: yes
+
+- name: print failtask2
+  debug:
+    msg: "{{failtask.name2}} rc={{failtask2.rc}}"

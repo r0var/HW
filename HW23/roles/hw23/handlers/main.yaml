@@ -1,0 +1,8 @@
+---
+- name: restart services
+  become: true
+  service:
+    name: "{{item}}"
+    state: restarted
+    enabled: yes
+  loop: "{{services_list}}"
