@@ -19,7 +19,8 @@
         state: present
       loop: "{{packages_list}}"
       notify:
-        - restart services
+        - restart nginx
+        - restart docker
 
 - name: get service facts
   service_facts:

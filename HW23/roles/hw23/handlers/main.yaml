@@ -1,8 +1,14 @@
 ---
-- name: restart services
+- name: restart nginx
   become: true
   service:
-    name: "{{item}}"
+    name: nginx
     state: restarted
     enabled: yes
-  loop: "{{services_list}}"
+
+- name: restart docker
+  become: true
+  service:
+    name: docker
+    state: restarted
+    enabled: yes
