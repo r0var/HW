@@ -1,0 +1,72 @@
+---
+- name: create file
+  become: true
+  file:
+    path: "{{testfile.name}}"
+    mode: "{{testfile.mode}}"
+    state: "{{testfile.state}}"
+
+- name: check file stat
+  stat:
+    path: "{{testfile.name}}"
+  register: stat_result
+
+- name: rename file
+  become: true
+  command: "mv {{testfile.name}} {{testfile.newname}}"
+  when: stat_result.stat.exists
+
+- name: rename file 2
+  block:
+    - name: copy file
+      copy:
+        remote_src: yes
+        src: "{{testfile.name}}"
+        dest: "{{testfile.newname}}"
+    - name: remove old file
+      file:
+        path: "{{testfile.name}}"
+        state: absent
+  when: stat_result.stat.exists
+
+- name: check file stat
+  stat:
+    path: "{{testfile.name}}"
+  register: stat_result
+
+- name: if file not exists
+  debug:
+    msg: "{{testfile.name}} not exists"
+  when: not stat_result.stat.exists
+
+- name: create link
+  become: true
+  file:
+    src: "{{testlink.src}}"
+    dest: "{{testlink.name}}"
+    state: "{{testlink.state}}"
+
+- name: check link stat
+  stat:
+    path: "{{testlink.name}}"
+  register: islink
+
+- name: rename link
+  become: true
+  command: "mv {{testlink.name}} {{testlink.newname}}"
+  when: islink.stat.exists and islink.stat.islnk 
+
+- name: check link stat
+  stat:
+    path: "{{testlink.name}}"
+  register: islink
+
+- name: if file is not link
+  debug:
+    msg: "{{testlink.name}} not a link"
+  when: islink.stat.exists and not islink.stat.islnk
+
+- name: if file not exists
+  debug:
+    msg: "{{testlink.name}} does not exists"
+  when: not islink.stat.exists
