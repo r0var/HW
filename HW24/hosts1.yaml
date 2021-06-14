@@ -1,0 +1,8 @@
+all:
+  children:
+    centos1:
+      hosts:
+        192.168.10.10
+    centos2:
+      hosts:
+        192.168.10.11
