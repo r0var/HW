@@ -1,6 +1,6 @@
 # HW41
 
-Public or private subnet is defined by the type of gateway
+Public or private subnet is defined by the type of gateway.
 Public internet gateway for public subnets.
 Nat gateway or no gateway for private subnets.
 
