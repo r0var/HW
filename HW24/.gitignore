@@ -1,2 +1,3 @@
 .vagrant/
 Vagrantfile
+.ansible_vault_pass
