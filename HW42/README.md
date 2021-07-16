@@ -33,6 +33,7 @@ Summary t2.micro allows four IP addresses.
 Create a S3 bucket.  
 1. Copy any object to s3. Make it public.  
 ![8](/HW42/images/08.png)
+![12](/HW42/images/12.png)
   
 Try to download it using wget  and curl
 ![9](/HW42/images/09.png)
