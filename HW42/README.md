@@ -21,21 +21,23 @@ Summary t2.micro allows four IP addresses.
 ![4](/HW42/images/04.png)
   
 6. Resize root volume.  
-7. Attach a new EBS to your instance. mount it to /tmp dir  
 ![5](/HW42/images/05.png)
   
-8. Enable deletion protection for EC2. Try to terminate the instance.  
+7. Attach a new EBS to your instance. mount it to /tmp dir  
 ![6](/HW42/images/06.png)
+  
+8. Enable deletion protection for EC2. Try to terminate the instance.  
+![7](/HW42/images/07.png)
   
   
 Create a S3 bucket.  
 1. Copy any object to s3. Make it public.  
-![7](/HW42/images/07.png)
+![8](/HW42/images/08.png)
   
 Try to download it using wget  and curl
-![8](/HW42/images/08.png)
 ![9](/HW42/images/09.png)
+![10](/HW42/images/10.png)
   
 2. Create a folder. Create a lifecycle policy to delete  
 everything in the folder older than 1 day. Check this policy works  
-![10](/HW42/images/10.png)
+![11](/HW42/images/11.png)
