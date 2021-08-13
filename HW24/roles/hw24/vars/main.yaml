@@ -1,1 +1,12 @@
-username: hw24
+users: 
+  - hw24
+  - hw24_1
+  - hw24_2
+
+local_path_to_date: roles/hw24/files/date
+remote_path_to_date: /tmp
+
+local_path: roles/hw24/files
+remote_path: /home/vagrant
+packages_list:
+  - wget-1.14-18.el7_6.1.x86_64.rpm

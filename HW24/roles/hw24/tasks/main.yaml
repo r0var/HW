@@ -1,31 +1,9 @@
 ---
 - name: create user and keys
-  block:
-  - name: create user
-    become: true
-    ansible.builtin.user:
-      name: "{{username}}"
-      create_home: yes
-      password: "{{password | password_hash('sha512')}}"
-
-  - name: create ssh folder
-    become: true
-    become_user: "{{username}}"
-    ansible.builtin.file:
-      name: "/home/{{username}}/.ssh"
-      state: directory
-      owner: "{{username}}"
-      mode: '700'
-
-  - name: create keys
-    become: true
-    become_user: "{{username}}"
-    ansible.builtin.copy:
-      src: files/authorized_keys
-      dest: "/home/{{username}}/.ssh/authorized_keys"
-      owner: "{{username}}"
-      mode: '644'
+  include_tasks: users.yaml
+  loop: "{{ users }}"
   tags: user
+  when: "users|length <= 3"
 
 - name: update packages
   become: true
@@ -33,3 +11,27 @@
     name: '*'
     state: latest
   tags: update
+
+- name: check if google is accessible
+  ansible.builtin.wait_for:
+    host: google.com
+    port: 80
+    state: started
+    delay: 0
+    timeout: 1
+
+- name: write date to file
+  ansible.builtin.copy:
+    content: "{{ ansible_date_time.date }}"
+    dest: "{{ local_path_to_date }}"
+  delegate_to: localhost
+
+- name: copy date to remote
+  become: true
+  ansible.builtin.copy:
+    src: "{{ local_path_to_date }}"
+    dest: "{{ remote_path_to_date }}"
+
+- name: install packages from local
+  include_tasks: install.yaml
+  loop: "{{ packages_list }}"

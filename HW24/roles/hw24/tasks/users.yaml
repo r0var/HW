@@ -1,0 +1,25 @@
+---
+- name: create user
+  become: true
+  ansible.builtin.user:
+    name: "{{ item }}"
+    create_home: yes
+    password: "{{password | password_hash('sha512')}}"
+
+- name: create ssh folder
+  become: true
+  become_user: "{{ item }}"
+  ansible.builtin.file:
+    name: "/home/{{ item }}/.ssh"
+    state: directory
+    owner: "{{ item }}"
+    mode: '700'
+
+- name: create keys
+  become: true
+  become_user: "{{ item }}"
+  ansible.builtin.copy:
+    src: files/authorized_keys
+    dest: "/home/{{ item }}/.ssh/authorized_keys"
+    owner: "{{ item }}"
+    mode: '644'

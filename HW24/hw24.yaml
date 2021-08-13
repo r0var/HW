@@ -1,6 +1,20 @@
 ---
-- hosts: centos1
+- hosts: all
   vars_files:
     - vars.yaml
   roles:
     - hw24
+
+- name: task to skip on one hosts
+  hosts: all !centos2
+  tasks:
+  - name: say hello
+    debug:
+      msg: "hello {{ ansible_hostname }}"
+
+- name: task to skip on one hosts
+  hosts: all !group
+  tasks:
+  - name: say hello
+    debug:
+      msg: "hello there {{ ansible_hostname }}"
