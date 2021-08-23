@@ -1,0 +1,31 @@
+---
+- name: copy rpm package
+  copy:
+    src: "{{ local_path }}/{{ item }}"
+    dest: "{{ remote_path }}"
+
+- name: local checksum
+  stat:
+    path: "{{ local_path }}/{{ item }}"
+    checksum_algorithm: sha1
+  delegate_to: localhost
+  register: local_files
+
+- name: remote checksum
+  stat:
+    path: "{{ remote_path }}/{{ item }}"
+    checksum_algorithm: sha1
+  register: remote_files
+
+- name: install rpm package
+  become: true
+  yum:
+    name: "{{ remote_path }}/{{ item }}"
+    state: present
+    disable_gpg_check: yes
+  when: remote_files.stat.checksum == local_files.stat.checksum
+
+- name: message if checksum failed
+  debug:
+    msg: "Package checksum incorrect!"
+  when: remote_files.stat.checksum != local_files.stat.checksum

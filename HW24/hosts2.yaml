@@ -1,0 +1,12 @@
+all:
+  children:
+    centos3:
+      hosts:
+        192.168.10.12
+    centos4:
+      hosts:
+        192.168.10.13
+    group:
+      children:
+        centos3:
+        centos4:

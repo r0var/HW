@@ -1,0 +1,4 @@
+.vagrant/
+.ansible_vault_pass
+roles/hw24/files/authorized_keys
+roles/hw24/files/date
